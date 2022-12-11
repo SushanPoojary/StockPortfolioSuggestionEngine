@@ -15,15 +15,15 @@ app = Flask(__name__)
 CORS(app)
 
 # Ethical Investing:
-ethical_investing = ["AAPL", "TSLA", "ADBE"]
+ethical_investing = ["TSLA", "NEE", "GE"]
 # Growth Investing :
-growth_investing = ["AMZN", "VEEV", "NOW"]
+growth_investing = ["AMZN", "SHOP", "EFC"]
 # index Investing:
-index_investing = ["FXAIX", "IVV", "SWPPX"]
+index_investing = ["IVV","FXAIX","SWPPX"]
 # Quality Investing:
-quality_investing = ["NVDA", "GOOGL", "CSCO"]
+quality_investing = ["MSFT", "NKE", "CRM"]
 # Value Investing :
-value_investing = ["INTC", "T", "CVS"]
+value_investing = ["PAG", "CVS", "OMF"]
 
 
 
