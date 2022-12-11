@@ -22,52 +22,54 @@ export default class MarketAtGlance extends React.Component {
                     "title": "Our Portfolio",
                     "symbols": [
                         {
-                            "s": "NASDAQ:AAPL",
+                            "s": "NASDAQ:TSLA",
                             "d": "APPLE INC"
                         },
                         {
-                            "s": "NASDAQ:TSLA",
-                            "d": "TESLA INC"
+                            "s": "NYSE:NEE",
+                            "d": "NextEra Energy Inc"
                         },
                         {
-                            "s": "NASDAQ:ADBE",
-                            "d": "ADOBE INC"
+                            "s": "NYSE:GE",
+                            "d": "General Electric Company"
                         },
                         {
                             "s": "NASDAQ:AMZN",
                             "d": "AMAZON COM INC"
                         },
                         {
-                            "s": "NYSE:VEEV",
-                            "d": "VEEVA SYSTEMS INC"
+                            "s": "NYSE:SHOP",
+                            "d": "Shopify Inc"
+                            
                         },
                         {
-                            "s": "NYSE:NOW",
-                            "d": "SERVICENOW INC"
+                            "s": "NYSE:EFC",
+                            "d": "Ellington Financial Inc"
                         },
                         {
-                            "s": "NASDAQ:NVDA",
-                            "d": "NVIDIA CORP"
+                            "s": "NASDAQ:MSFT",
+                            "d": "Microsoft Corp"
                         },
                         {
-                            "s": "NASDAQ:GOOGL",
-                            "d": "ALPHABET INC (GOOGLE) CLASS A"
+                            "s": "NYSE:NKE",
+                            "d": "Nike Inc"
+                           
                         },
                         {
-                            "s": "NASDAQ:CSCO",
-                            "d": "CISCO SYSTEMS INC"
+                            "s": "NYSE:CRM",
+                            "d": "Salesforce Inc"
                         },
                         {
-                            "s": "NASDAQ:INTC",
-                            "d": "INTEL CORP"
-                        },
-                        {
-                            "s": "NYSE:T",
-                            "d": "AT&T INC"
+                            "s": "NYSE:PAG",
+                            "d": "Penske Automotive Group, Inc."
                         },
                         {
                             "s": "NYSE:CVS",
                             "d": "CVS HEALTH CORPORATION"
+                        },
+                        {
+                            "s": "NYSE:OMF",
+                            "d": "OneMain Holdings Inc"
                         }
                     ],
                     "originalTitle": "Our Portfolio"
