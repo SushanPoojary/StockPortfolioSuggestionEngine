@@ -54,7 +54,7 @@ export default class UserProfile extends React.Component {
     //Need to get the axios call here
     this.setState(() => ({ loading: true }))
 
-    const result = (await axios.post('http://localhost:5000/calculateprofit', { amount: this.state.amount, strategies: this.state.strategyOne + (this.state.strategyTwo !== 'DEFAULT' ? ',' + this.state.strategyTwo : '') })).data.result
+    const result = (await axios.post('http://localhost:5000/stocksuggestion', { amount: this.state.amount, strategies: this.state.strategyOne + (this.state.strategyTwo !== 'DEFAULT' ? ',' + this.state.strategyTwo : '') })).data.result
     this.setState(() => ({ result, loading: false }))
     localStorage.setItem('result', JSON.stringify(result))
     this.props.history.push({

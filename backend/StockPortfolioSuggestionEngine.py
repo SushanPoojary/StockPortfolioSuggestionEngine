@@ -1,12 +1,8 @@
 from flask import Flask
 from flask import request
-import json
 import yfinance as yf
-import requests
 import datetime
-import pytz
 from pandas import DataFrame
-import pandas as pd
 import math
 import datetime
 from flask_cors import CORS
@@ -27,29 +23,23 @@ value_investing = ["PAG", "CVS", "OMF"]
 
 
 
-@app.route("/calculateprofit", methods=['POST'])
-# @cross_origin(origin='*',headers=['Content- Type','Authorization'])
-def stockStrategy():
-    print('In Calculate Profit')
-    # parameters = request.get_data("amount")
+@app.route("/stocksuggestion", methods=['POST'])
+def stock_investment():
     Amount = request.json['amount']
 
     Strategies = request.json['strategies'].split(",")
 
-    return return_data(Strategies, Amount)
+    return stocks_invest(Strategies, Amount)
 
 
-def return_data(Strategies, Amount):
+def stocks_invest(Strategies, Amount):
     result = []
-    print('In return data')
     if(len(Strategies) > 1):
-        print('Inside if statement')
         amount_for_strategy1 = int(Amount) / 2
         amount_for_strategy2 = int(Amount) / 2
         response_for_strategy1 = []
         response_for_strategy2 = []
         stock_list = []
-        price = []
         
 
         if(Strategies[0] == "Index Investing" or Strategies[0] == "Ethical Investing" or Strategies[0] == "Growth Investing" or Strategies[0] == "Quality Investing" or Strategies[0] == "Value Investing"):
@@ -74,20 +64,13 @@ def return_data(Strategies, Amount):
                     stock_list.append((value_investing[1]))
                     stock_list.append((value_investing[2]))
 
-            response_for_strategy1 = (get_stock_quote(stock_list))
+            response_for_strategy1 = (investment_breakdown(stock_list))
             stock_dict = {}
             stock_unit = {}
             
-            print('----------------------------Response_From_Strategy1------------------------------------------------')
-            print(response_for_strategy1)
             for i in response_for_strategy1:
                 stock_dict[i['companyName']] = i['currentPrice']
                 stock_unit[i['companyName']] = 0
-            print('----------------------------Strategy1------------------------------------------------')
-            print('----------------------------stock_dict------------------------------------------------')
-            print(stock_dict)
-            print('----------------------------stock_unit------------------------------------------------')
-            print(stock_unit)    
             flag = 'true'
             while amount_for_strategy1 >= 0 and flag == 'true':
                 
@@ -102,12 +85,6 @@ def return_data(Strategies, Amount):
                         for i in stock_dict:
                             if amount_for_strategy1 > stock_dict.get(i)  :
                                 flag = 'true'
-
-            print('----------------------------Strategy1------------------------------------------------')
-            print('----------------------------stock_dict------------------------------------------------')
-            print(stock_dict)
-            print('----------------------------stock_unit------------------------------------------------')
-            print(stock_unit)
             for i in response_for_strategy1:
                 if stock_unit[i['companyName']] > 0:
                     data_for_company = {}
@@ -119,12 +96,9 @@ def return_data(Strategies, Amount):
                     data_for_company['AmountYouInvest'] = stock_unit[i['companyName']]*i['currentPrice']
                     data_for_company['Strategy'] = Strategies[0]
                     ticker = yf.Ticker(i['ticker'])
-                    # print(ticker.history(interval = '5d'))
                     data = DataFrame(ticker.history(period = '5d'))
                     temp_data = data.T
-                    print('--------------DATE-------------------------------------------')
                     dataList = [datetime.datetime.date(cols) for cols in temp_data.columns]
-                    print(dataList)
                     historical_data = []
                     historical_dates = dataList
                     for i in range(0,len(data['Open'])):
@@ -138,8 +112,6 @@ def return_data(Strategies, Amount):
                     data_for_company['HistoricalDates'] = historical_dates
                     result.append(data_for_company) 
                      
-        
-            print('----------------------------Response From Strategy1------------------------------------------------')
             print(result)            
                 
         if(Strategies[1] == "Index Investing" or Strategies[1]  == "Ethical Investing" or Strategies[1]  == "Growth Investing" or Strategies[1]  == "Quality Investing" or Strategies[1]  == "Value Investing"):
@@ -166,18 +138,11 @@ def return_data(Strategies, Amount):
                     stock_list.append((value_investing[2]))
             stock_dict = {}
             stock_unit = {}
-            response_for_strategy2 = (get_stock_quote(stock_list))
-            print('----------------------------Response_From_Strategy2------------------------------------------------')
-            print(response_for_strategy2)
+            response_for_strategy2 = (investment_breakdown(stock_list))
            
             for i in response_for_strategy2:
                 stock_dict[i['companyName']] = i['currentPrice']
-                stock_unit[i['companyName']] = 0
-            print('----------------------------Strategy1------------------------------------------------')
-            print('----------------------------stock_dict------------------------------------------------')
-            print(stock_dict)
-            print('----------------------------stock_unit------------------------------------------------')
-            print(stock_unit)    
+                stock_unit[i['companyName']] = 0   
             flag = 'true'
             while amount_for_strategy2 >= 0 and flag == 'true':
                 flag = 'false'
@@ -190,12 +155,7 @@ def return_data(Strategies, Amount):
                         for i in stock_dict:
                             if amount_for_strategy2 > stock_dict.get(i)  :
                                 flag = 'true'
-              
-            print('----------------------------Strategy2------------------------------------------------')
-            print('----------------------------stock_dict2------------------------------------------------')
-            print(stock_dict)
-            print('----------------------------stock_unit2------------------------------------------------')
-            print(stock_unit)
+
 
             for i in response_for_strategy2:
                 if stock_unit[i['companyName']] > 0:
@@ -208,16 +168,12 @@ def return_data(Strategies, Amount):
                     data_for_company['AmountYouInvest'] = stock_unit[i['companyName']]*i['currentPrice']
                     ticker = yf.Ticker(i['ticker'])
                     data_for_company['Strategy'] = Strategies[1]
-                    # print(ticker.history(interval = '5d'))
                     data = DataFrame(ticker.history(period = '5d'))
                     temp_data = data.T
-                    print('--------------DATE-------------------------------------------')
                     dataList = [datetime.datetime.date(cols) for cols in temp_data.columns]
-                    print(dataList)
                     historical_data = []
                     historical_dates = dataList
                     for i in range(0, len(data['Open'])):
-                        #historical_dates.append(data[0][i])
                         if(math.isnan(data['Open'][i])):
                             historical_data.append(0)
                         else:    
@@ -225,14 +181,11 @@ def return_data(Strategies, Amount):
                     data_for_company['HistoricalData'] = historical_data
                     data_for_company['HistoricalDates'] = historical_dates    
                     result.append(data_for_company)  
-            print('----------------------------Response From Strategy2------------------------------------------------')
             print(result)
     else:
-        print('--------------------Inside SINGLE STRATEGY statement-------------')
         amount_for_strategy1 = int(Amount)        
         response_for_strategy1 = []
         stock_list = []
-        price = []
         
 
         if(Strategies[0] == "Index Investing" or Strategies[0] == "Ethical Investing" or Strategies[0] == "Growth Investing" or Strategies[0] == "Quality Investing" or Strategies[0] == "Value Investing"):
@@ -257,20 +210,13 @@ def return_data(Strategies, Amount):
                     stock_list.append((value_investing[1]))
                     stock_list.append((value_investing[2]))
 
-            response_for_strategy1 = (get_stock_quote(stock_list))
+            response_for_strategy1 = (investment_breakdown(stock_list))
             stock_dict = {}
             stock_unit = {}
-            
-            print('----------------------------Response_From_Strategy1------------------------------------------------')
-            print(response_for_strategy1)
+
             for i in response_for_strategy1:
                 stock_dict[i['companyName']] = i['currentPrice']
-                stock_unit[i['companyName']] = 0
-            print('----------------------------Strategy1------------------------------------------------')
-            print('----------------------------stock_dict------------------------------------------------')
-            print(stock_dict)
-            print('----------------------------stock_unit------------------------------------------------')
-            print(stock_unit)    
+                stock_unit[i['companyName']] = 0   
             flag = 'true'
             while amount_for_strategy1 >= 0 and flag == 'true':
                 
@@ -286,11 +232,6 @@ def return_data(Strategies, Amount):
                             if amount_for_strategy1 > stock_dict.get(i)  :
                                 flag = 'true'
 
-            print('----------------------------Strategy1------------------------------------------------')
-            print('----------------------------stock_dict------------------------------------------------')
-            print(stock_dict)
-            print('----------------------------stock_unit------------------------------------------------')
-            print(stock_unit)
             for i in response_for_strategy1:
                 if stock_unit[i['companyName']] > 0:
                     data_for_company = {}
@@ -302,12 +243,9 @@ def return_data(Strategies, Amount):
                     data_for_company['AmountYouInvest'] = stock_unit[i['companyName']]*i['currentPrice']
                     ticker = yf.Ticker(i['ticker'])
                     data_for_company['Strategy'] = Strategies[0]
-                    # print(ticker.history(interval = '5d'))
                     data = DataFrame(ticker.history(period = '5d'))
                     temp_data = data.T
-                    print('--------------DATE-------------------------------------------')
                     dataList = [datetime.datetime.date(cols) for cols in temp_data.columns]
-                    print(dataList)
                     historical_data = []
                     historical_dates = dataList
                     for i in range(0, len(data['Open'])):
@@ -318,9 +256,7 @@ def return_data(Strategies, Amount):
                     data_for_company['HistoricalData'] = historical_data   
                     data_for_company['HistoricalDates'] = historical_dates
                     result.append(data_for_company) 
-                     
-        
-            print('----------------------------Response From Strategy1------------------------------------------------')
+
             print(result)                 
 
    
@@ -329,34 +265,19 @@ def return_data(Strategies, Amount):
     return resultdict
 
 
-def get_stock_quote(stock_list):
-    """Function that calls stock API for each stock to fetch stock details"""
+def investment_breakdown(stock_list):
 
-    # Filter defining the data requirement
-    param_filter = ['longName', 'bid', 'previousClose']
     stock_quote = []
-    # Loopping through given stock and appending data to result
     for ticker in stock_list:
         stock = yf.Ticker(ticker)
-        print('------------------LONG NAME---------')
-        print(stock.info['longName'])
-        print('------------------------------------------------------------Values from YF----------------------------')
+
         data = DataFrame(stock.history(period='1mo'))
-       # print(DataFrame(stock.history(period='1mo')))
+
         currentData = data.iloc[-1, :]
         previousData = data.iloc[-2, :]
         previousClose = float(previousData[3])
         currentValue = float(currentData[3])
-        print('-----------------------------------------previousclose----------------------')
-        print(previousClose)
-        print('-----------------------------------------currentvalue----------------------')
-        print(currentValue)
-        
-        print("------------------------------API Rsponse-----------------------------")
         json_response={}
-        print(json_response)
-           
-        
         value_change = round((currentValue-previousClose), 2)
         percentage_change = round(float((value_change/previousClose)*100), 2)
         value_change = ('+ ' + str(value_change)
