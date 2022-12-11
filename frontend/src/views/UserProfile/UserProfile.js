@@ -67,9 +67,6 @@ export default class UserProfile extends React.Component {
       <div>
 
         <Card>
-          <CardHeader color="danger">
-            <h4 className="cardTitleWhite">Enter Your Preference</h4>
-          </CardHeader>
           <CardBody>
             <form onSubmit={this.handleOnSubmit}>
               <div className="form-group">
