@@ -1,3 +1,1 @@
 # StockPortfolioSuggestionEngine
-
-CMPE 285
