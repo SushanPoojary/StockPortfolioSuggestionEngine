@@ -73,7 +73,7 @@ const Dashboard = (props) => {
               </CardFooter>
             </Card>
           </GridItem>
-        )) : <h3>Navigate to Dashboard and Enter Investment Preference.</h3>}
+        )) : <h3>Please enter Investment Preference in the dashboard.</h3>}
       </GridContainer>
     </div>
   );
