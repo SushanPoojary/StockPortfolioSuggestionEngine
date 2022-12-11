@@ -61,17 +61,14 @@ const Dashboard = (props) => {
                 />
               </CardHeader>
               <CardBody>
-                <h3 className={classes.cardTitle}>{result.Strategy}</h3>
-                <h4 className={classes.cardTitle}>{result.CompantName}</h4>
-                <p><strong>Current Price:</strong> {result.CurrentPrice}</p>
-                <p><strong>Value Change:</strong> {result.ValueChange}</p>
-                <p><strong>Percent Change:</strong> {result.PercentageChange}</p>
-                <p><strong>Units You Can Buy:</strong> {result.UnitsYouCanBuy}</p>
-                <p><strong>Amount You Can Invest:</strong> ${result.AmountYouInvest.toFixed(2)}</p>
+                <h4 className={classes.cardTitle}>{result.CompanyName}</h4>
+                <p><strong>Current Stock Price:</strong> ${result.CurrentPrice.toFixed(2)}</p>
+                <p><strong>Total Stocks Recommended:</strong> {result.UnitsYouCanBuy}</p>
+                <p><strong>Investment Amount:</strong> ${result.AmountYouInvest.toFixed(2)}</p>
               </CardBody>
               <CardFooter chart>
-                <div className={classes.stats}>
-                  <AccessTime /> updated a minutes ago
+                <div className={classes.cardTitle}>
+                  {result.Strategy}
               </div>
               </CardFooter>
             </Card>
