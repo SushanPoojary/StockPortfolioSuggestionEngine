@@ -76,7 +76,7 @@ const Dashboard = (props) => {
               </CardFooter>
             </Card>
           </GridItem>
-        )) : <h3>Please fill in the details first in dashboard page</h3>}
+        )) : <h3>Navigate to Dashboard and Enter Investment Preference.</h3>}
       </GridContainer>
     </div>
   );
