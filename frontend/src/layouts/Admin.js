@@ -83,7 +83,7 @@ export default function Admin({ ...rest }) {
     <div className={classes.wrapper}>
       <Sidebar
         routes={routes}
-        logoText={"Stock Investment Strategy Engine"}
+        logoText={"Stock Portfolio Suggestion Engine"}
         logo={logo}
         image={image}
         handleDrawerToggle={handleDrawerToggle}
