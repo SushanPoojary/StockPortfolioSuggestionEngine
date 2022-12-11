@@ -82,8 +82,6 @@ def stocks_invest(Investing_Strategy, Investment):
                     company_stock_data = {}
                     company_stock_data['CompanyName'] = i['companyName']
                     company_stock_data['CurrentPrice'] =(i['currentPrice'])
-                    company_stock_data['PercentageChange']=(i['percentage_change'])
-                    company_stock_data['ValueChange']=(i['value_change'])
                     company_stock_data['UnitsYouCanBuy'] = stock_unit[i['companyName']]
                     company_stock_data['AmountYouInvest'] = stock_unit[i['companyName']]*i['currentPrice']
                     company_stock_data['Strategy'] = Investing_Strategy[0]
@@ -154,8 +152,6 @@ def stocks_invest(Investing_Strategy, Investment):
                     company_stock_data = {} 
                     company_stock_data['CompanyName'] = i['companyName']
                     company_stock_data['CurrentPrice'] =(i['currentPrice'])
-                    company_stock_data['PercentageChange']=(i['percentage_change'])
-                    company_stock_data['ValueChange']=(i['value_change'])
                     company_stock_data['UnitsYouCanBuy'] = stock_unit[i['companyName']]
                     company_stock_data['AmountYouInvest'] = stock_unit[i['companyName']]*i['currentPrice']
                     ticker = yf.Ticker(i['ticker'])
@@ -229,8 +225,6 @@ def stocks_invest(Investing_Strategy, Investment):
                     company_stock_data = {}
                     company_stock_data['CompanyName'] = i['companyName']
                     company_stock_data['CurrentPrice'] =(i['currentPrice'])
-                    company_stock_data['PercentageChange']=(i['percentage_change'])
-                    company_stock_data['ValueChange']=(i['value_change'])
                     company_stock_data['UnitsYouCanBuy'] = stock_unit[i['companyName']]
                     company_stock_data['AmountYouInvest'] = stock_unit[i['companyName']]*i['currentPrice']
                     ticker = yf.Ticker(i['ticker'])
@@ -280,7 +274,6 @@ def investment_breakdown(suggested_stocks):
         json_response['companyName'] = stock.info['longName']
         json_response['currentPrice'] = currentValue
         json_response['ticker']=ticker
-        json_response.update([('value_change', value_change), ('percentage_change', percentage_change)] )
         final_quote.append(json_response)
 
     return final_quote
