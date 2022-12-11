@@ -9,11 +9,11 @@ app = Flask(__name__)
 CORS(app)
 
 
-index_investing = ["IVV","FXAIX","SWPPX"]
-ethical_investing = ["TSLA", "NEE", "GE"]
+index_investing = ["VUG", "FXAIX", "SWPPX"]
+ethical_investing = ["ADBE", "NEE", "BYND"]
 quality_investing = ["MSFT", "NKE", "CRM"]
 growth_investing = ["AMZN", "SHOP", "EFC"]
-value_investing = ["PAG", "CVS", "OMF"]
+value_investing = ["PG", "BRK-B", "OMF"]
 
 
 
@@ -288,4 +288,4 @@ def investment_breakdown(suggested_stocks):
 
 if __name__ == "__main__":
     app.static_folder = 'static'
-    app.run(host="0.0.0.0", debug=True)
+    app.run(host="0.0.0.0", debug=False)
