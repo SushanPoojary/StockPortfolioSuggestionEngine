@@ -80,7 +80,7 @@ def stocks_invest(Investing_Strategy, Investment):
             for i in response_for_strategy1:
                 if stock_unit[i['companyName']] > 0:
                     company_stock_data = {}
-                    company_stock_data['CompantName'] = i['companyName']
+                    company_stock_data['CompanyName'] = i['companyName']
                     company_stock_data['CurrentPrice'] =(i['currentPrice'])
                     company_stock_data['PercentageChange']=(i['percentage_change'])
                     company_stock_data['ValueChange']=(i['value_change'])
@@ -152,7 +152,7 @@ def stocks_invest(Investing_Strategy, Investment):
             for i in response_for_strategy2:
                 if stock_unit[i['companyName']] > 0:
                     company_stock_data = {} 
-                    company_stock_data['CompantName'] = i['companyName']
+                    company_stock_data['CompanyName'] = i['companyName']
                     company_stock_data['CurrentPrice'] =(i['currentPrice'])
                     company_stock_data['PercentageChange']=(i['percentage_change'])
                     company_stock_data['ValueChange']=(i['value_change'])
@@ -227,7 +227,7 @@ def stocks_invest(Investing_Strategy, Investment):
             for i in response_for_strategy1:
                 if stock_unit[i['companyName']] > 0:
                     company_stock_data = {}
-                    company_stock_data['CompantName'] = i['companyName']
+                    company_stock_data['CompanyName'] = i['companyName']
                     company_stock_data['CurrentPrice'] =(i['currentPrice'])
                     company_stock_data['PercentageChange']=(i['percentage_change'])
                     company_stock_data['ValueChange']=(i['value_change'])

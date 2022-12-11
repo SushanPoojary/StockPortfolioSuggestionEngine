@@ -48,8 +48,8 @@ export default class UserProfile extends React.Component {
 
   handleOnSubmit = async (e) => {
     e.preventDefault()
-    if (this.state.amount === '') return toast('Amount Missing', { type: 'error' })
-    if (!this.state.strategyOne) return toast('Strategy 1 missing', { type: 'error' })
+    if (this.state.amount === '') return toast('Enter Amount', { type: 'warning' })
+    if (!this.state.strategyOne) return toast('Atleast 1 strategy required', { type: 'warning' })
     localStorage.clear()
     //Need to get the axios call here
     this.setState(() => ({ loading: true }))
