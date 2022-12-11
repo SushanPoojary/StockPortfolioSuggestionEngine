@@ -16,48 +16,26 @@
 
 */
 // @material-ui/icons
-import Dashboard from "@material-ui/icons/Dashboard";
-import Person from "@material-ui/icons/Person";
+
+import ShowChart from "@material-ui/icons/ShowChart";
+import HomeSharp from "@material-ui/icons/HomeSharp";
 import DashboardPage from "views/Dashboard/Dashboard.js";
-import Typography from "views/Typography/Typography.js";
 import UserProfile from "views/UserProfile/UserProfile.js";
-import MarketAtGlance from './views/MarketAtGlance';
-import OurPortfolio from './views/OurPortfolio'
+
 
 const dashboardRoutes = [
   {
     path: "/user",
     name: "Dashboard",
-    icon: Person,
+    icon: HomeSharp,
     component: UserProfile,
     layout: "/admin"
   },
   {
     path: "/dashboard",
     name: "Investment Details",
-    icon: Dashboard,
+    icon: ShowChart,
     component: DashboardPage,
-    layout: "/admin"
-  },
-  {
-    path: "/typography",
-    name: "Read More",
-    icon: Dashboard,
-    component: Typography,
-    layout: "/admin"
-  },
-  {
-    path: "/marketatglance",
-    name: "Market At Glance",
-    icon: Dashboard,
-    component: MarketAtGlance,
-    layout: "/admin"
-  },
-  {
-    path: "/ourportfolio",
-    name: "Our Portfolio",
-    icon: Dashboard,
-    component: OurPortfolio,
     layout: "/admin"
   }
 ];

@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-import loading from '../Gear-0.2s-200px.gif'
+import loading from '../load.gif'
 import Button from "components/CustomButtons/Button.js";
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
@@ -67,45 +67,45 @@ export default class UserProfile extends React.Component {
       <div>
 
         <Card>
-          <CardHeader color="success">
-            <h4 className="cardTitleWhite">Select the below options</h4>
+          <CardHeader color="danger">
+            <h4 className="cardTitleWhite">Enter Your Preference</h4>
           </CardHeader>
           <CardBody>
             <form onSubmit={this.handleOnSubmit}>
               <div className="form-group">
-                <label htmlFor="exampleInputEmail1">Enter Amount to Invest</label>
+                <label htmlFor="exampleInputEmail1">Investment Amount</label>
                 <input
                   type="number"
                   className="form-control"
                   id="exampleInputEmail1"
                   aria-describedby="emailHelp"
-                  placeholder="Enter amount"
+                  placeholder="Amount in USD"
                   min={5000}
                   value={this.state.amount}
                   onChange={this.onAmountChange}
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="exampleFormControlSelect1">Strategy 1</label>
+                <label htmlFor="exampleFormControlSelect1">Investment Strategy 1</label>
                 <select className="form-control" id="exampleFormControlSelect1" onChange={this.onStrategyOneChange} defaultValue={'DEFAULT'}>
-                  <option value="DEFAULT" disabled>Select your first strategy from below</option>
+                  <option value="DEFAULT" disabled>Select Your Preferred Investment Strategy</option>
                   {
                     this.state.strategies.map((strategy) => <option key={strategy} value={strategy}>{strategy}</option>)
                   }
                 </select>
               </div>
 
-              {this.state.strategyOne && <div className="form-group">
-                <label htmlFor="exampleFormControlSelect1">Strategy 2</label>
+              {<div className="form-group">
+                <label htmlFor="exampleFormControlSelect1">Investment Strategy 2</label>
                 <select className="form-control" id="exampleFormControlSelect1" onChange={this.onStrategyTwoChange} defaultValue={"DEFAULT"}>
-                  <option value="DEFAULT" disabled>Select your second strategy from below</option>
+                  <option value="DEFAULT" disabled>Select Your Preferred Investment Strategy</option>
                   {
                     this.state.availableSecondStrategies.map((availableStrategy) => <option key={availableStrategy} value={availableStrategy}>{availableStrategy}</option>)
                   }
                 </select>
               </div>}
 
-              <Button type="submit" color="success" >Get Results</Button>
+              <Button type="submit" color="info" >Show Strategy</Button>
             </form>
           </CardBody>
         </Card>
