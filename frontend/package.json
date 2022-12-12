@@ -10,8 +10,10 @@
     "axios": "^0.19.2",
     "bootstrap": "^4.5.0",
     "chartist": "0.10.1",
+    "chartist-plugin-tooltips": "0.0.17",
     "classnames": "2.2.6",
     "history": "4.9.0",
+    "lodash": "^4.17.21",
     "moment": "^2.25.3",
     "perfect-scrollbar": "1.4.0",
     "prop-types": "15.7.2",
@@ -26,7 +28,7 @@
     "react-toastify": "^6.0.4"
   },
   "scripts": {
-    "start": "react-scripts --openssl-legacy-provider start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",

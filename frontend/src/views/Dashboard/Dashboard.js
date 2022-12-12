@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 // react plugin for creating charts
 import ChartistGraph from "react-chartist";
+import "chartist-plugin-tooltips";
+
+
+import _ from 'lodash';
 // @material-ui/core
 import { makeStyles } from "@material-ui/core/styles";
 // @material-ui/icons
@@ -48,15 +52,65 @@ const Dashboard = (props) => {
   return (
     <div>
       <GridContainer>
-        {results.length > 0 ? results.map((result, index) => (
-          <GridItem key={index} xs={12} sm={12} md={4}>
+        {results.length > 0 ? results.map((result, index) => {
+          const res = {};
+          const optionsVal = {
+            width: "300px",
+            height: "300px",
+            high: 1000,
+            low: 0,
+            axisX: {
+              labelInterpolationFunc: function(value, index) {
+                return index%2 === 0 ? value: null;
+              }
+            },
+            plugins: [
+              Chartist.plugins.tooltip({
+              anchorToPoint: true,
+              tooltipFn2c: (serieName, detail, z) => {
+                const values = detail.split(",");      
+                const date = new Date(parseInt(values[0]));
+                const value = parseFloat(values[1]) || null;
+              }})
+
+            
+
+              // ChartistTooltip({
+              //   appendToBody: true,
+              //   showPoint: true,
+              //   anchorToPoint: true,
+              //   transformTooltipTextFnc: (value) => `${Math.ceil(+value)}`,
+              //   tooltipFnc: (value) => {
+              //     return <p> {value }</p>
+              //   },
+              //   appendToBody: false,
+              //   class: "default-tooltip"
+              // })
+            ]
+          }
+          const labels = result.HistoricalDates.map((date) => moment(date).utc().format('MM/DD'));
+          const data = result.HistoricalData;
+          const updatedData = _.map(data, (rec) => {
+            return {
+              meta: 'Stock Price:',
+              value: rec
+            }
+          })
+          _.set(res, 'labels', labels);
+          _.set(res, 'series', [updatedData]);
+          console.log('dataa', updatedData);
+          const upperLimit = Math.round(Math.max(...data));
+          _.set(optionsVal, 'high', upperLimit);
+
+          return (
+            <GridItem key={index} xs={12} sm={12} md={4}>
             <Card chart>
               <CardHeader color={colors[Math.floor(Math.random() * Math.floor(5))]}>
                 <ChartistGraph
                   className="ct-chart"
-                  data={{ labels: result.HistoricalDates.map((date) => moment(date).utc().format('MM/DD')), series: [result.HistoricalData] }}
-                  type="Line"
-                  options={{...options, high: Math.max(result.HistoricalData), low: Math.min(result.HistoricalData)}}
+                  data={res}
+                  options={optionsVal}
+                  type="Bar"
                   listener={dailySalesChart.animation}
                 />
               </CardHeader>
@@ -73,7 +127,11 @@ const Dashboard = (props) => {
               </CardFooter>
             </Card>
           </GridItem>
-        )) : <h3>Navigate to Dashboard and Enter Investment Preference.</h3>}
+
+          )
+          
+
+}) : <h3>Navigate to Dashboard and Enter Investment Preference.</h3>}
       </GridContainer>
     </div>
   );

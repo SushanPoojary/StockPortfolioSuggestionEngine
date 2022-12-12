@@ -17,7 +17,7 @@
 */
 // @material-ui/icons
 
-import ShowChart from "@material-ui/icons/ShowChart";
+import ShowChart from "@material-ui/icons/BarChart";
 import HomeSharp from "@material-ui/icons/HomeSharp";
 import DashboardPage from "views/Dashboard/Dashboard.js";
 import UserProfile from "views/UserProfile/UserProfile.js";
